@@ -9,22 +9,24 @@ import { AppLayout } from './_layouts/app'
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/app',
     element: <AppLayout />,
     errorElement: <Error />,
     children: [
-      { path: '/', element: <Dashboard /> },
+      { path: '', element: <Dashboard /> },
     ]
   },
   {
     path: '/',
     element: <AuthLayout />,
     children: [
-      { path: '/sign-in', element: <SignIn /> },
+      { path: '', element: <SignIn /> },
     ]
   },
   {
     path: '*',
     element: <NotFound />,
   },
-])
+], {
+  basename: '/insurances-web'
+})
