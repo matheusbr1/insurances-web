@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Helmet } from 'react-helmet-async'
+import { api } from '@/lib/axios'
 
 const signInForm = z.object({
   email: z.string().email(),
@@ -20,6 +21,7 @@ type SignInForm = z.infer<typeof signInForm>
 
 export function SignIn() {
   const [searhParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const {
     register,
@@ -39,11 +41,17 @@ export function SignIn() {
 
   async function handleSignIn({ email, password }: SignInForm) {
     try {
-      await authenticate({ email, password })
-
       console.log({ email, password })
 
+      const { accessToken } = await authenticate({ email, password })
+
+      sessionStorage.setItem('insurances-app:access-token', accessToken)
+
+      api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
+
       toast.success('Bem vindo')
+
+      navigate('/app')
     } catch (error) {
       toast.error('Credenciais inválidas.')
     }
