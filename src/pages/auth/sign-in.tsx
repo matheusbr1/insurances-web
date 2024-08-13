@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Helmet } from 'react-helmet-async'
 import { api } from '@/lib/axios'
+import { APP_NAME } from '@/constants'
 
 const signInForm = z.object({
   email: z.string().email(),
@@ -45,7 +46,7 @@ export function SignIn() {
 
       const { accessToken } = await authenticate({ email, password })
 
-      sessionStorage.setItem('insurances-app:access-token', accessToken)
+      sessionStorage.setItem(`@${APP_NAME}:access-token`, accessToken)
 
       api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
 

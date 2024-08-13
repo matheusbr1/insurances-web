@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger
 } from "./ui/dropdown-menu";
 import { Skeleton } from "./ui/skeleton";
+import { APP_NAME } from "@/constants";
 
 export function AccountMenu() {
   const navigate = useNavigate()
@@ -23,7 +24,7 @@ export function AccountMenu() {
   })
 
   const signOut = () => {
-    sessionStorage.removeItem('insurances-app:access-token')
+    sessionStorage.removeItem(`@${APP_NAME}:access-token`)
     navigate('/', {
       replace: true
     })
