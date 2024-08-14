@@ -42,8 +42,6 @@ export function SignIn() {
 
   async function handleSignIn({ email, password }: SignInForm) {
     try {
-      console.log({ email, password })
-
       const { accessToken } = await authenticate({ email, password })
 
       sessionStorage.setItem(`@${APP_NAME}:access-token`, accessToken)
@@ -61,11 +59,11 @@ export function SignIn() {
   return <>
     <Helmet title="Login" />
     <div className="p-8" >
-      <Button asChild className='absolute right-8 top-8' variant='ghost' >
+      {/* <Button asChild className='absolute right-8 top-8' variant='ghost' >
         <Link to='/sign-up'>
           Cadastrar-se
         </Link>
-      </Button>
+      </Button> */}
 
       <div className="w-[350px] flex flex-col justify-center gap-6" >
         <div className="flex flex-col gap-2 text-center" >

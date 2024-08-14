@@ -1,0 +1,1 @@
+export const isAdmin = (role: number) => role === 2

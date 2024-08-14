@@ -1,4 +1,4 @@
-import { Home, Lock, User } from "lucide-react";
+import { Lock } from "lucide-react";
 
 import { NavLink } from "./nav-link";
 import { ModeToggle } from "./theme/theme-toggle";
@@ -17,12 +17,10 @@ export function Header() {
 
         <nav className="flex items-center space-x-4 lg:space-x-6" >
           <NavLink to='/app' >
-            <Home className="h-4 w-4" />
             Início
           </NavLink>
 
           <NavLink to='/app/customers' >
-            <User className="h-4 w-4" />
             Clientes
           </NavLink>
         </nav>

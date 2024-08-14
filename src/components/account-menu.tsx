@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { ChevronDown, LogOut } from "lucide-react";
+import { ChevronDown, LogOut, UserRoundCog } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { getProfile } from "@/api/get-profile";
 import { Button } from "./ui/button";
@@ -13,6 +13,8 @@ import {
 } from "./ui/dropdown-menu";
 import { Skeleton } from "./ui/skeleton";
 import { APP_NAME } from "@/constants";
+import { isAdmin } from "@/utils/isAdmin";
+import { queryClient } from "@/lib/react-query";
 
 export function AccountMenu() {
   const navigate = useNavigate()
@@ -24,6 +26,9 @@ export function AccountMenu() {
   })
 
   const signOut = () => {
+    queryClient.removeQueries({
+      queryKey: ['profile']
+    })
     sessionStorage.removeItem(`@${APP_NAME}:access-token`)
     navigate('/', {
       replace: true
@@ -55,6 +60,14 @@ export function AccountMenu() {
           )}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        {isAdmin(Number(profile?.role)) && (
+          <DropdownMenuItem asChild >
+            <button onClick={() => navigate('users')} className="w-full" >
+              <UserRoundCog className="w-4 h-4 mr-2" />
+              <span>Usuários</span>
+            </button>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem className="text-rose-500 dark:text-rose-400" asChild>
           <button onClick={() => signOut()} className="w-full" >
             <LogOut className="w-4 h-4 mr-2" />

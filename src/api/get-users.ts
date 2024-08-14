@@ -1,6 +1,6 @@
 import { api } from "@/lib/axios";
 
-interface Profile {
+export interface User {
   id: number
   name: string
   email: string
@@ -10,7 +10,7 @@ interface Profile {
   updatedAt: Date
 }
 
-export async function getProfile() {
-  const response = await api.post<Profile>('/auth/me')
+export async function getUsers() {
+  const response = await api.get<User[]>('/users')
   return response.data
 }

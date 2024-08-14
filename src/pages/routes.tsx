@@ -6,6 +6,7 @@ import { SignIn } from './auth/sign-in'
 import { Error } from './error'
 import { NotFound } from './404'
 import { AppLayout } from './_layouts/app'
+import { Users } from './app/users/users'
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       { path: '', element: <Dashboard /> },
+      { path: 'users', element: <Users /> },
     ]
   },
   {
