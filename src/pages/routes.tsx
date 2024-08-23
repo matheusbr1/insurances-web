@@ -7,6 +7,7 @@ import { Error } from './error'
 import { NotFound } from './404'
 import { AppLayout } from './_layouts/app'
 import { Users } from './app/users/users'
+import { Customers } from './app/customers/customers'
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
     children: [
       { path: '', element: <Dashboard /> },
       { path: 'users', element: <Users /> },
+      { path: 'customers', element: <Customers /> },
     ]
   },
   {
