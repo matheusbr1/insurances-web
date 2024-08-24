@@ -1,11 +1,10 @@
 import { Trash, UserPen } from "lucide-react";
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { useState } from "react";
-import { deleteUser } from "@/api/delete-user";
+import { deleteCustomer } from "@/api/delete-customer";
 import { queryClient } from "@/lib/react-query";
 import {
   Dialog,
@@ -34,9 +33,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { changeUser } from "@/api/change-user";
 import axios from "axios";
+import { Customer } from "@/api/get-customers";
 
 interface CustomerTableRowProps {
-  customer: Any
+  customer: Customer
 }
 
 const customerForm = z.object({
@@ -66,7 +66,7 @@ export function CustomerTableRow({ customer }: CustomerTableRowProps) {
 
   async function handleDeleteCustomer() {
     try {
-      await deleteUser(customer.id)
+      await deleteCustomer(customer.id)
 
       queryClient.invalidateQueries({
         queryKey: ['customers']
@@ -200,7 +200,7 @@ export function CustomerTableRow({ customer }: CustomerTableRowProps) {
             <AlertDialogHeader>
               <AlertDialogTitle>Tem certeza que deseja deletar esse cliente?</AlertDialogTitle>
               <AlertDialogDescription>
-                Os dados do usuário {customer.name} não poderão ser mais recuperados.
+                Os dados do cliente {customer.name} não poderão ser mais recuperados.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
