@@ -4,8 +4,6 @@ import { ptBR } from 'date-fns/locale'
 
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { User } from '@/api/get-users';
-//import { UserStatus } from './user-role';
 import { useState } from "react";
 import { deleteUser } from "@/api/delete-user";
 import { queryClient } from "@/lib/react-query";
@@ -38,7 +36,7 @@ import { changeUser } from "@/api/change-user";
 import axios from "axios";
 
 interface CustomerTableRowProps {
-  customer: any
+  customer: Any
 }
 
 const customerForm = z.object({
@@ -130,8 +128,7 @@ export function CustomerTableRow({ customer }: CustomerTableRowProps) {
         })}
       </TableCell>
       <TableCell>
-      {/* <UserStatus role={user.role} /> */}
-      Status
+        {customer.status}
       </TableCell>
       <TableCell className="font-medium" >
         {customer.name}

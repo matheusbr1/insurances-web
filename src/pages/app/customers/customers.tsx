@@ -12,20 +12,18 @@ import { Button } from "@/components/ui/button";
 import { Label } from '../../../components/ui/label';
 import { Input } from '../../../components/ui/input';
 import { CustomerTableRow } from './customer-table-row';
+import { useQuery } from '@tanstack/react-query';
+import { getCustomers } from '@/api/get-customers';
+import { CustomerTableSkeleton } from './customer-table-skeleton';
 
 export const Customers: React.FC = () => {
-
-  const customers = [
-    {
-      id: 1,
-      name: "TEMOM SERVICOS",
-      email: "temo@temo.com.br",
-      status: "ativo",
-      createdAt: "2024-08-21T19:08:00.000Z",
-    }
-  ];
-
   const [isCreateNewCustomerDialogOpen, setIsCreateNewCustomerDialogOpen] = useState(false);
+
+  const { data: customers, isLoading: isLoadingCustomers } = useQuery({
+    queryKey: ['customers'],
+    staleTime: Infinity,
+    queryFn: getCustomers
+  })
 
   return (
     <>
@@ -92,6 +90,7 @@ export const Customers: React.FC = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
+                {isLoadingCustomers && <CustomerTableSkeleton />}
                 {customers && customers.map(customer => (
                   <CustomerTableRow key={customer.id} customer={customer} />
                 ))}
