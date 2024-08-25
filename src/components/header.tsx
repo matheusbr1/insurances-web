@@ -11,7 +11,7 @@ export function Header() {
     <div className="border-b" >
       <div className="flex h-16 items-center gap-6 px-6" >
         <Lock className="h-6 w-6" />
-        <p>{APP_NAME}</p>
+        <p className="font-semibold" >{APP_NAME}</p>
 
         <Separator orientation="vertical" className="h-6" />
 
