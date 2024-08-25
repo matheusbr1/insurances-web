@@ -1,1 +1,1 @@
-export const APP_NAME = 'SeguraPRO'
+export const APP_NAME = 'Segurify'
