@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Helmet } from "react-helmet-async";
 import {
   Table,
@@ -7,17 +7,16 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+
 import { Button } from "@/components/ui/button";
-import { Label } from '../../../components/ui/label';
-import { Input } from '../../../components/ui/input';
 import { CustomerTableRow } from './customer-table-row';
 import { useQuery } from '@tanstack/react-query';
 import { getCustomers } from '@/api/get-customers';
 import { CustomerTableSkeleton } from './customer-table-skeleton';
+import { useNavigate } from 'react-router-dom';
 
 export const Customers: React.FC = () => {
-  const [isCreateNewCustomerDialogOpen, setIsCreateNewCustomerDialogOpen] = useState(false);
+  const navigate = useNavigate()
 
   const { data: customers, isLoading: isLoadingCustomers } = useQuery({
     queryKey: ['customers'],
@@ -30,49 +29,14 @@ export const Customers: React.FC = () => {
       <Helmet title="Clientes" />
       <div className="flex flex-col gap-4">
         <div className="flex justify-between w-full mb-2">
-          <h1 className="text-2xl font-bold tracking-tight">Usuários</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Clientes</h1>
 
-          <Dialog open={isCreateNewCustomerDialogOpen} onOpenChange={setIsCreateNewCustomerDialogOpen}>
-            <DialogTrigger asChild>
-              <Button
-                onClick={() => setIsCreateNewCustomerDialogOpen(true)}
-                variant='default'
-              >
-                Novo Cliente
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Novo Cliente</DialogTitle>
-                <DialogDescription>Crie um novo cliente</DialogDescription>
-              </DialogHeader>
-              <div className="space-y-6">
-                <form className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Nome</Label>
-                    <Input id='name' type='text' />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email">E-mail</Label>
-                    <Input id='email' type='email' />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Senha</Label>
-                    <Input id='password' type='password' />
-                  </div>
-
-                  <Button
-                    type='submit'
-                    className="w-full"
-                  >
-                    Criar
-                  </Button>
-                </form>
-              </div>
-            </DialogContent>
-          </Dialog>
+          <Button
+            onClick={() => navigate('new')}
+            variant='default'
+          >
+            Novo Cliente
+          </Button>
         </div>
 
         <div className="space-y-2.5">

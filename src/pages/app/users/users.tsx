@@ -15,7 +15,14 @@ import { getProfile } from "@/api/get-profile";
 import { isAdmin } from "@/utils/isAdmin";
 import { useNavigate } from "react-router-dom";
 import { UserTableSkeleton } from "./user-table-skeleton";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "@/components/ui/dialog";
 import { useForm } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
