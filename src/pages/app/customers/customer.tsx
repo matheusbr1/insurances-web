@@ -17,6 +17,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { toast } from 'sonner';
+import axios from 'axios';
+import { queryClient } from '@/lib/react-query';
+import { createCustomer } from '@/api/create-customer';
 
 export const Customer: React.FC = () => {
   const navigate = useNavigate()
@@ -26,9 +30,36 @@ export const Customer: React.FC = () => {
     register,
   } = useForm()
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function onSubmit(data: any) {
-    console.log(data)
+  async function onSubmit(data: unknown) {
+    try {
+      console.log(data)
+
+      await createCustomer(data)
+
+      queryClient.invalidateQueries({
+        queryKey: ['customers']
+      })
+
+      toast.success('Usuário criado com sucesso!')
+
+      navigate('/app/customers')
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          // Server responded with a status code outside the 2xx range
+          const errorMessage = error.response.data?.message || error.response.statusText;
+          toast.error(errorMessage);
+        } else if (error.request) {
+          // Request was made but no response received
+          toast.error('Nenhuma resposta do servidor. Verifique sua conexão.');
+        } else {
+          // Something else happened while setting up the request
+          toast.error(`Erro ao criar o cliente: ${error.message}`);
+        }
+      } else {
+        toast.error(`Ocorreu um erro ao criar o cliente!`)
+      }
+    }
   }
 
   return (
