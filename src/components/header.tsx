@@ -23,6 +23,10 @@ export function Header() {
           <NavLink to='/app/customers' >
             Clientes
           </NavLink>
+
+          <NavLink to='/app/producers' >
+            Produtores
+          </NavLink>
         </nav>
 
         <div className="ml-auto flex items-center gap-2" >

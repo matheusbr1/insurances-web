@@ -9,6 +9,8 @@ import { AppLayout } from './_layouts/app'
 import { Users } from './app/users/users'
 import { Customers } from './app/customers/customers'
 import { Customer } from './app/customers/customer'
+import { Producers } from './app/producers/producers'
+import { Producer } from './app/producers/producer'
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +22,8 @@ export const router = createBrowserRouter([
       { path: 'users', element: <Users /> },
       { path: 'customers', element: <Customers /> },
       { path: 'customers/new', element: <Customer /> },
+      { path: 'producers', element: <Producers /> },
+      { path: 'producers/new', element: <Producer /> },
     ]
   },
   {
