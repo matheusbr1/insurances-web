@@ -22,6 +22,7 @@ import axios from 'axios';
 import { queryClient } from '@/lib/react-query';
 import { createProducer } from '@/api/create-producer';
 
+
 export const Producer: React.FC = () => {
   const navigate = useNavigate();
 
@@ -32,7 +33,9 @@ export const Producer: React.FC = () => {
 
   async function onSubmit(data: unknown) {
     try {
+      console.log(data)
       await createProducer(data);
+
 
       queryClient.invalidateQueries({
         queryKey: ['producers']
@@ -102,7 +105,7 @@ export const Producer: React.FC = () => {
 
             <div className='flex flex-col gap-4'>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 rounded border p-6'>
-                <div className='col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 mb-2'>
+                <div className='col-span-1 md:col-span-2 lg:col-span-3 xl:grid-cols-4 mb-2'>
                   <p className='font-semibold text-lg'>Dados Pessoais</p>
                 </div>
 
@@ -142,7 +145,7 @@ export const Producer: React.FC = () => {
               </div>
 
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 rounded border p-6'>
-                <div className='col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 mb-2'>
+                <div className='col-span-1 md:col-span-2 lg:col-span-3 xl:grid-cols-4 mb-2'>
                   <p className='font-semibold text-lg'>Endereço</p>
                 </div>
 
@@ -183,7 +186,7 @@ export const Producer: React.FC = () => {
               </div>
 
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 rounded border p-6'>
-                <div className='col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 mb-2'>
+                <div className='col-span-1 md:col-span-2 lg:col-span-3 xl:grid-cols-4 mb-2'>
                   <p className='font-semibold text-lg'>Contatos</p>
                 </div>
 
@@ -199,7 +202,7 @@ export const Producer: React.FC = () => {
               </div>
 
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 rounded border p-6'>
-                <div className='col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 mb-2'>
+                <div className='col-span-1 md:col-span-2 lg:col-span-3 xl:grid-cols-4 mb-2'>
                   <p className='font-semibold text-lg'>Informações Profissionais</p>
                 </div>
 
