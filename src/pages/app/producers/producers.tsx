@@ -15,6 +15,9 @@ import { getProducers } from '@/api/get-producers';
 import { ProducerTableSkeleton } from './producer-table-skeleton';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
+import * as XLSX from 'xlsx';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 // Defina a interface para o objeto Producer
 interface Producer {
@@ -49,7 +52,6 @@ interface Producer {
   updatedAt: string;
 }
 
-
 const options = [
   { value: 'name', label: 'Nome Completo' },
   { value: 'email', label: 'E-mail' },
@@ -63,7 +65,6 @@ export const Producers: React.FC = () => {
   const [filter, setFilter] = useState('');
   const [filterType, setFilterType] = useState('name');
 
-  // Especifique o tipo para os dados retornados por useQuery
   const { data: producers, isLoading: isLoadingProducers, isError } = useQuery<Producer[]>({
     queryKey: ['producers'],
     staleTime: Infinity,
@@ -104,6 +105,48 @@ export const Producers: React.FC = () => {
     if (currentPage > 1) setCurrentPage(prevPage => prevPage - 1);
   };
 
+  // Funções para exportar os dados
+  const exportToCSV = (data, filename = 'producers.csv') => {
+    const csv = data.map(row => Object.values(row).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const exportToExcel = (data, filename = 'producers.xlsx') => {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = {
+      Sheets: { 'data': worksheet },
+      SheetNames: ['data']
+    };
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const exportToPDF = () => {
+    const input = document.getElementById('producers-table');
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, 'PNG', 0, 0);
+      pdf.save('producers.pdf');
+    });
+  };
+
   return (
     <>
       <Helmet title="Produtores" />
@@ -118,7 +161,7 @@ export const Producers: React.FC = () => {
           </Button>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-2.5" >
           <div className="mb-4 flex items-center gap-4">
             <Select
               options={options}
@@ -135,7 +178,7 @@ export const Producers: React.FC = () => {
             />
           </div>
 
-          <div className="border rounded-md">
+          <div id="producers-table" className="border rounded-md">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -173,6 +216,13 @@ export const Producers: React.FC = () => {
             >
               Próxima
             </Button>
+          </div>
+
+          {/* Botões para exportação de relatórios */}
+          <div className="flex space-x-4 mt-4">
+            <Button onClick={() => exportToCSV(currentRecords)}>Exportar para CSV</Button>
+            <Button onClick={() => exportToExcel(currentRecords)}>Exportar para Excel</Button>
+            <Button onClick={exportToPDF}>Exportar para PDF</Button>
           </div>
         </div>
       </div>

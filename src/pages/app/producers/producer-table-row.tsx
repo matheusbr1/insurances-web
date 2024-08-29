@@ -31,7 +31,6 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { changeProducer } from "@/api/change-producer";
 import axios from "axios";
 import { Producer } from "@/api/get-producers";
 
@@ -369,4 +368,8 @@ export function ProducerTableRow({ producer }: ProducerTableRowProps) {
       </TableCell>
     </TableRow>
   )
+}
+
+function changeProducer(id: number, payload: Partial<{ fullName?: string | undefined; cpfCnpj?: string | undefined; birthDate?: string | undefined; identityDocument?: string | undefined; address?: string | undefined; phone?: string | undefined; email?: string | undefined; companyName?: string | undefined; position?: string | undefined; professionalRegistrationNumber?: string | undefined; operatingSegment?: string | undefined; operatingRegion?: string | undefined; contractType?: string | undefined; contactPreference?: string | undefined; availableContactHours?: string | undefined; capturedClientCount?: number | undefined; capturedInsuranceTypes?: string | undefined; startOfActivitiesDate?: string | undefined; generatedBusinessVolume?: number | undefined; conversionRate?: number | undefined; signedContract?: string | undefined; certificatesLicenses?: string | undefined; references?: string | undefined; additionalNotes?: string | undefined; registrationDate?: string | undefined; registrationResponsible?: string | undefined; }>) {
+  throw new Error("Function not implemented.");
 }
