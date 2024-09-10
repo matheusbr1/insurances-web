@@ -4,10 +4,10 @@ import { ptBR } from 'date-fns/locale'
 
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { User } from '@/api/get-users';
+import { User } from '@/api/users/get-users';
 import { UserStatus } from './user-role';
 import { useState } from "react";
-import { deleteUser } from "@/api/delete-user";
+import { deleteUser } from "@/api/users/delete-user";
 import { queryClient } from "@/lib/react-query";
 import {
   Dialog,
@@ -34,7 +34,7 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { changeUser } from "@/api/change-user";
+import { changeUser } from "@/api/users/change-user";
 import axios from "axios";
 
 interface UserTableRowProps {

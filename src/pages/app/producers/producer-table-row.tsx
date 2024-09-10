@@ -4,7 +4,7 @@ import { ptBR } from 'date-fns/locale'
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { useState } from "react";
-import { deleteProducer } from "@/api/delete-producer";
+import { deleteProducer } from "@/api/producer/delete-producer";
 import { queryClient } from "@/lib/react-query";
 import {
   Dialog,
@@ -32,7 +32,7 @@ import { z } from 'zod'
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { Producer } from "@/api/get-producers";
+import { Producer } from "@/api/producer/get-producers";
 
 interface ProducerTableRowProps {
   producer: Producer

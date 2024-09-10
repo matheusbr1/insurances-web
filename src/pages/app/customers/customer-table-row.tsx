@@ -4,7 +4,7 @@ import { ptBR } from 'date-fns/locale'
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { useState } from "react";
-import { deleteCustomer } from "@/api/delete-customer";
+import { deleteCustomer } from "@/api/customers/delete-customer";
 import { queryClient } from "@/lib/react-query";
 import {
   Dialog,
@@ -31,9 +31,9 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { changeUser } from "@/api/change-user";
+import { changeUser } from "@/api/users/change-user";
 import axios from "axios";
-import { Customer } from "@/api/get-customers";
+import { Customer } from "@/api/customers/get-customers";
 
 interface CustomerTableRowProps {
   customer: Customer

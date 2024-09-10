@@ -1,3 +1,4 @@
+
 import { createBrowserRouter } from 'react-router-dom'
 
 import { AuthLayout } from './_layouts/auth'
@@ -11,6 +12,8 @@ import { Customers } from './app/customers/customers'
 import { Customer } from './app/customers/customer'
 import { Producers } from './app/producers/producers'
 import { Producer } from './app/producers/producer'
+import { InsuranceForm as Insurance } from './app/insurance/insurance'
+import { Insurances } from './app/insurance/insurances'
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +27,14 @@ export const router = createBrowserRouter([
       { path: 'customers/new', element: <Customer /> },
       { path: 'producers', element: <Producers /> },
       { path: 'producers/new', element: <Producer /> },
+      { path: 'insurance', element: <Insurances /> },
+      { 
+        path: 'insurance/new', 
+        element: <Insurance onSubmit={(data) => { 
+          // Lógica para lidar com o envio do formulário
+          console.log('Formulário enviado:', data);
+        }} /> 
+      },
     ]
   },
   {

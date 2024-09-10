@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ProducerTableRow } from './producer-table-row';
 import { useQuery } from '@tanstack/react-query';
-import { getProducers } from '@/api/get-producers';
+import { getProducers } from '@/api/producer/get-producers';
 import { ProducerTableSkeleton } from './producer-table-skeleton';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';

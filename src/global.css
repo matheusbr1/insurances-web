@@ -66,4 +66,11 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  .dialog-content-scrollable {
+    max-height: 80vh; /* Limita a altura do modal a 80% da viewport */
+    overflow-y: auto; /* Adiciona a rolagem vertical */
+    padding-right: 16px; /* Garante que o conteúdo não seja ocultado pela rolagem */
+  }
+  
 }

@@ -20,7 +20,7 @@ import {
 import { toast } from 'sonner';
 import axios from 'axios';
 import { queryClient } from '@/lib/react-query';
-import { createProducer } from '@/api/create-producer';
+import { createProducer } from '@/api/producer/create-producer';
 
 
 export const Producer: React.FC = () => {

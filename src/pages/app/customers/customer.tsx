@@ -20,7 +20,7 @@ import {
 import { toast } from 'sonner';
 import axios from 'axios';
 import { queryClient } from '@/lib/react-query';
-import { createCustomer } from '@/api/create-customer';
+import { createCustomer } from '@/api/customers/create-customer';
 
 export const Customer: React.FC = () => {
   const navigate = useNavigate()

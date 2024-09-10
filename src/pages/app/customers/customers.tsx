@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { CustomerTableRow } from './customer-table-row';
 import { useQuery } from '@tanstack/react-query';
-import { getCustomers } from '@/api/get-customers';
+import { getCustomers } from '@/api/customers/get-customers';
 import { CustomerTableSkeleton } from './customer-table-skeleton';
 import { useNavigate } from 'react-router-dom';
 

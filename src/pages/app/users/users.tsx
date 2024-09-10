@@ -1,4 +1,4 @@
-import { getUsers } from "@/api/get-users";
+import { getUsers } from "@/api/users/get-users";
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -29,7 +29,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from 'sonner'
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createUser } from "@/api/create-user";
+import { createUser } from "@/api/users/create-user";
 import axios from "axios";
 import { queryClient } from "@/lib/react-query";
 
